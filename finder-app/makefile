@@ -11,13 +11,16 @@ else ifneq ($(CROSS_COMPILE), )
 endif
 
 
-BIN = writer
+BIN = ./writer
 
 all:$(BIN)
 	@exit 0 
 
 $(BIN):writer.c
 	$(cc) writer.c -o $@
+ifeq ($(CROSS_COMPILE), aarch64-none-linux-gnu-)
+	@file $(BIN) | cat > ../assignments/assignment2/fileresult.txt
+endif
 
 clean:
 	rm -rf $(BIN)
