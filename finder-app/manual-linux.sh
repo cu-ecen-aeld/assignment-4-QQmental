@@ -15,7 +15,6 @@ TOOLCHAIN=/home/chiut/arm-gnu-toolchain/gcc-arm-10.3-2021.07-x86_64-aarch64-none
 CROSS_COMPILE=aarch64-none-linux-gnu-
 export PATH=$PATH:/home/chiut/arm-gnu-toolchain/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin
 
-
 if [ $# -lt 1 ]
 then
 	echo "Using default directory ${OUTDIR} for output"
@@ -41,8 +40,8 @@ if [ ! -e ${OUTDIR}/linux-stable/arch/${ARCH}/boot/Image ]; then
 
     # TODO: Add your kernel build steps here
 
-    make -j2 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} defconfig
-    make -j2 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} all
+    make -j4 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} defconfig
+    make -j4 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} all
 fi
 
 echo "Adding the Image in outdir"
@@ -76,7 +75,7 @@ git clone git://busybox.net/busybox.git
     git checkout ${BUSYBOX_VERSION}
     # TODO:  Configure busybox
 
-    make -j2 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} defconfig
+    make -j4 ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE} defconfig
     
 else
     cd busybox
@@ -135,4 +134,4 @@ sudo chown root:root ${ROOT_FS_DIR}
 # TODO: Create initramfs.cpio.gz
 find . | cpio -H newc -ov --owner root:root > ${OUTDIR}/initramfs.cpio
 cd ${OUTDIR}
-gzip -f initramfs.cpio
+gzip -kf initramfs.cpio
