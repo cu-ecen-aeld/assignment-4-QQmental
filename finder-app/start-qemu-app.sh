@@ -23,11 +23,9 @@ if [ ! -e ${INITRD_IMAGE} ]; then
     exit 1
 fi
 
-export PATH=$PATH:/home/chiut/qemu/aarch64-softmmu
-
 echo "Booting the kernel"
 # See trick at https://superuser.com/a/1412150 to route serial port output to file
-qemu-system-aarch64 \
+./qemu-system-aarch64 \
         -m 256M \
         -M virt \
         -cpu cortex-a53 \
