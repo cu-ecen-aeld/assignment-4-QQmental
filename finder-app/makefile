@@ -3,7 +3,7 @@ CROSS_COMPILE =
 cc = gcc
 
 ifeq ($(CROSS_COMPILE), aarch64-none-linux-gnu-)
-	cc = ./$(CROSS_COMPILE)gcc
+	cc = $(CROSS_COMPILE)gcc
 else ifneq ($(CROSS_COMPILE), )
 	cc = $(CROSS_COMPILE)gcc
 endif

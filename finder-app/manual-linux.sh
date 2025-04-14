@@ -112,6 +112,7 @@ cp ${FINDER_APP_DIR}/libc.so.6             lib64/
 
 # TODO: Make device nodes
 sudo mknod -m 666 dev/null c 1 3
+sudo mknod -m 666 dev/console c 1 5
 
 # TODO: Clean and build the writer utility
 make -C ${FINDER_APP_DIR} clean
