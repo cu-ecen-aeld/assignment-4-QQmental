@@ -13,7 +13,6 @@ FINDER_APP_DIR=$(realpath $(dirname $0))
 ARCH=arm64
 TOOLCHAIN=/home/chiut/arm-gnu-toolchain/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/aarch64-none-linux-gnu
 CROSS_COMPILE=aarch64-none-linux-gnu-
-export PATH=$PATH:/home/chiut/arm-gnu-toolchain/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu/bin
 
 if [ $# -lt 1 ]
 then
