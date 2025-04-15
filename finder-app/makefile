@@ -16,9 +16,9 @@ all:$(BIN)
 
 $(BIN):writer.c
 	$(cc) writer.c -o $@
-ifeq ($(CROSS_COMPILE), aarch64-none-linux-gnu-)
-	@file $(BIN) | cat > ../assignments/assignment2/fileresult.txt
-endif
+#ifeq ($(CROSS_COMPILE), aarch64-none-linux-gnu-)
+#	@file $(BIN) | cat > ../assignments/assignment2/fileresult.txt
+#endif
 
 clean:
 	rm -rf $(BIN)
