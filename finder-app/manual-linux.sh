@@ -103,10 +103,10 @@ ${CROSS_COMPILE}readelf -a bin/busybox | grep "Shared library"
 #cp ${TOOLCHAIN}/libc/lib64/libresolv.so.2      ./lib64/
 #cp ${TOOLCHAIN}/libc/lib64/libc.so.6           ./lib64/
 
-cp ${FINDER_APP_DIR}/ld-linux-aarch64.so.1 ./lib
-cp ${FINDER_APP_DIR}/libm.so.6             ./lib64/
-cp ${FINDER_APP_DIR}/libresolv.so.2        ./lib64/
-cp ${FINDER_APP_DIR}/libc.so.6             ./lib64/
+cp ld-linux-aarch64.so.1 ./lib
+cp libm.so.6             ./lib64/
+cp libresolv.so.2        ./lib64/
+cp libc.so.6             ./lib64/
 
 
 
