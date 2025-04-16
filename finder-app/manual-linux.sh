@@ -61,7 +61,7 @@ then
     mkdir -p ${ROOT_FS_DIR} && cd ${ROOT_FS_DIR}
     
     mkdir -p bin dev etc home lib lib64 proc sbin sys tmp usr var
-    mkdir -p usr/bin usr/sbin
+    mkdir -p usr/bin usr/sbin usr/lib
     mkdir -p var/log
 fi
 
@@ -102,11 +102,14 @@ ${CROSS_COMPILE}readelf -a bin/busybox | grep "Shared library"
 #cp ${TOOLCHAIN}/libc/lib64/libresolv.so.2      lib64/
 #cp ${TOOLCHAIN}/libc/lib64/libc.so.6           lib64/
 
-cp ${FINDER_APP_DIR}/ld-linux-aarch64.so.1 lib
-cp ${FINDER_APP_DIR}/libm.so.6             lib64/
-cp ${FINDER_APP_DIR}/libresolv.so.2        lib64/
-cp ${FINDER_APP_DIR}/libc.so.6             lib64/
-
+#cp ${FINDER_APP_DIR}/ld-linux-aarch64.so.1 lib
+#cp ${FINDER_APP_DIR}/libm.so.6             lib64/
+#cp ${FINDER_APP_DIR}/libresolv.so.2        lib64/
+#cp ${FINDER_APP_DIR}/libc.so.6             lib64/
+cp ld-linux-aarch64.so.1 ./lib
+cp libm.so.6             ./lib64
+cp libresolv.so.2        ./lib64
+cp libc.so.6             ./lib64
 
 
 # TODO: Make device nodes
