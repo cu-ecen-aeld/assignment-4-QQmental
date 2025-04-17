@@ -1,7 +1,7 @@
 #include "threading.h"
-#include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 
 // Optional: use these functions to add debug or error prints to your application
 #define DEBUG_LOG(msg,...)
@@ -14,7 +14,19 @@ void* threadfunc(void* thread_param)
     // TODO: wait, obtain mutex, wait, release mutex as described by thread_data structure
     // hint: use a cast like the one below to obtain thread arguments from your parameter
     //struct thread_data* thread_func_args = (struct thread_data *) thread_param;
-    return thread_param;
+    
+    struct thread_data *args = (struct thread_data *) thread_param;
+    usleep(args->wait_to_obtain_ms);
+
+    pthread_mutex_lock(args->mtx);
+
+    usleep(args->wait_to_release_ms);
+
+    pthread_mutex_unlock(args->mtx);
+
+    args->thread_complete_success = true;
+
+    return (void*)args;
 }
 
 
@@ -28,6 +40,21 @@ bool start_thread_obtaining_mutex(pthread_t *thread, pthread_mutex_t *mutex,int 
      *
      * See implementation details in threading.h file comment block
      */
-    return false;
+    
+    struct thread_data *args = (struct thread_data *)malloc(sizeof(*args));
+    if (args == NULL)
+        return false;
+
+    args->mtx = mutex;
+    args->thread_complete_success = false;
+    args->wait_to_obtain_ms = wait_to_obtain_ms;
+    args->wait_to_release_ms = wait_to_release_ms;
+    
+    int flag = pthread_create(thread, NULL, threadfunc, (void *) args);
+    if (flag != 0)
+        return false;
+
+    //pthread_join(thread, NULL);
+    return true;
 }
 
